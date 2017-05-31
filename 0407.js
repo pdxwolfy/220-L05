@@ -1,0 +1,60 @@
+"use strict";
+
+/* eslint no-console: "off" */
+/* eslint no-magic-numbers: "off" */
+
+function makeBank() {
+  return {
+    accounts: [],
+
+    openAccount: function () {
+      var accountId = Object.keys(this.accounts).length + 101;
+      var newAccount = makeAccount(accountId);
+      this.accounts.push(newAccount);
+      return newAccount;
+    },
+  };
+}
+
+function makeAccount(accountId) {
+  return {
+    balance:      0,
+    accountId:    accountId,
+    transactions: [],
+
+    deposit: function (amount) {
+      this.balance += amount;
+      this.transactions.push({ type: "deposit", amount: amount });
+      return amount;
+    },
+
+    withdraw: function (amount) {
+      if (amount > this.balance) {
+        amount = this.balance;
+      }
+
+      this.balance -= amount;
+      this.transactions.push({ type: "withdrawal", amount: amount });
+      return amount;
+    },
+  };
+}
+
+var bank = makeBank();
+console.log(bank);
+console.log(bank.accounts);
+console.log("");
+
+var account = bank.openAccount();
+console.log(account);
+console.log(account.balance === 0);
+console.log(account.deposit(100) === 100);
+console.log(account.balance === 100);
+console.log(account.withdraw(19) === 19);
+console.log(account.balance === 81);
+console.log(account.withdraw(91) === 81);
+console.log(account.balance === 0);
+console.log(account);
+var otherAccount = bank.openAccount();
+console.log(otherAccount);
+console.log(account);

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>On the River</title>
+  </head>
+  <body>
+    <h1>On The River</h1>
+    <p>The sun is low</p>
+    <p>The waters flow</p>
+    <script>
+
+"use strict";
+
+function findAllParagraphs() {
+  return Array.prototype.filter.call(
+    document.body.childNodes,
+    function isParagraph(node) {
+      return node instanceof HTMLParagraphElement;
+    }
+  );
+}
+
+function addArticleTextClass(nodes) {
+  return Array.prototype.forEach.call(
+    nodes,
+    function addClass(node) {
+      node.className = "article-text";
+    }
+  );
+}
+console.log(addArticleTextClass(findAllParagraphs()));
+
+    </script>
+  </body>
+</html>
