@@ -2,14 +2,52 @@
 <html lang="en-US">
   <head>
     <title>On the River</title>
+    <script src="show.js"></script>
   </head>
   <body>
-    <h1>On The River</h1>
-    <p>The sun is low</p>
-    <p>The waters flow</p>
+    <h1>On the River</h1>
+    <p>A poem by Paul Laurence Dunbar</p>
+
+    <p>
+      The sun is low,<br>
+      The waters flow,<br>
+      My boat is dancing to and fro.<br>
+      The eve is still,<br>
+      Yet from the hill<br>
+      The killdeer echoes loud and shrill.
+    </p>
+    <p>
+      The paddles plash,<br>
+      The wavelets dash,<br>
+      We see the summer lightning flash;<br>
+      While now and then,<br>
+      In marsh and fen<br>
+      Too muddy for the feet of men,
+    </p>
+    <p>
+      Where neither bird<br>
+      Nor beast has stirred,<br>
+      The spotted bullfrog's croak is heard.<br>
+      The wind is high,<br>
+      The grasses sigh,<br>
+      The sluggish stream goes sobbing by.
+    </p>
+    <p>
+      And far away<br>
+      The dying day<br>
+      Has cast its last effulgent ray;<br>
+      While on the land<br>
+      The shadows stand<br>
+      Proclaiming that the eve's at hand.
+    </p>
+
+    <pre id="console">
+    </pre>
     <script>
 
 "use strict";
+
+/* global show */
 
 function walk(node, callback) {
   var i;
@@ -20,26 +58,18 @@ function walk(node, callback) {
   }
 }
 
-function getElementsByName(name) {
-  var selected = [];
-  name = name.toUpperCase();
+var firstWords = [];
+walk(document.body, function firstWord(node) {
+  var text;
+  var words;
+  if (node.nodeName === "P") {
+    text = node.textContent;
+    words = text.trim().split(/\s+/);
+    firstWords.push(words[0]);
+  }
+});
 
-  walk(document, function isParagraph(node) {
-    if (node.tagName === name) {
-      selected.push(node);
-    }
-  });
-
-  return selected;
-}
-
-function addArticleTextClass(nodes) {
-  nodes.forEach(function addClass(node) {
-    node.className = "article-text";
-  });
-}
-
-console.log(addArticleTextClass(getElementsByName("p")));
+show.show(firstWords);
 
     </script>
   </body>

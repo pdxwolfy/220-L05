@@ -3,6 +3,9 @@
   <head>
     <title>On the River</title>
     <script src="show.js"></script>
+    <style>
+      .stanza { outline: 1px solid red; }
+    </style>
   </head>
   <body>
     <h1>On the River</h1>
@@ -47,8 +50,6 @@
 
 "use strict";
 
-/* global show */
-
 function walk(node, callback) {
   var i;
 
@@ -58,14 +59,23 @@ function walk(node, callback) {
   }
 }
 
-var numberOfParagraphs = 0;
+var paragraphs = [];
 walk(document.body, function isParagraph(node) {
   if (node.nodeName === "P") {
-    numberOfParagraphs += 1;
+    paragraphs.push(node);
   }
 });
 
-show.show(numberOfParagraphs);
+var isFirst = true;
+walk(document.body, function makeStanze(node) {
+  if (node.nodeName === "P") {
+    if (isFirst) {
+      isFirst = false;
+    } else {
+      node.classList.add("stanza");
+    }
+  }
+});
 
     </script>
   </body>

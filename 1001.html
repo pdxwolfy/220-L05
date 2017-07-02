@@ -2,7 +2,6 @@
 <html lang="en-US">
   <head>
     <title>On the River</title>
-    <script src="show.js"></script>
   </head>
   <body>
     <h1>On the River</h1>
@@ -41,31 +40,24 @@
       Proclaiming that the eve's at hand.
     </p>
 
-    <pre id="console">
-    </pre>
     <script>
 
 "use strict";
 
-/* global show */
+// function walk(node, callback) {
+//   var i;
+//
+//   callback(node);
+//   for (i = 0; i < node.childNodes.length; i++) {
+//     walk(node.childNodes[i], callback);
+//   }
+// }
 
-function walk(node, callback) {
-  var i;
-
-  callback(node);
-  for (i = 0; i < node.childNodes.length; i++) {
-    walk(node.childNodes[i], callback);
-  }
-}
-
-var numberOfParagraphs = 0;
-walk(document.body, function isParagraph(node) {
-  if (node.nodeName === "P") {
-    numberOfParagraphs += 1;
-  }
-});
-
-show.show(numberOfParagraphs);
+var html = document.childNodes[1];
+var body = html.lastChild;
+var h1 = body.childNodes[1];
+h1.style.color = "red";
+h1.style.fontSize = "48px";
 
     </script>
   </body>
